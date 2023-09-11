@@ -15,8 +15,7 @@ export const registerUser = async (req, res) => {
     }
 };
 
-
-// login User
+// login User functionalities
 export const loginUser = async (req, res) => {
     const { username, password } = req.body;
 
