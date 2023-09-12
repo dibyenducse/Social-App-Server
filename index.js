@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import AuthRoute from './routes/AuthRoute.js';
+import UserRoute from './routes/UserRoute.js';
 //Routes
 
 const app = express();
@@ -13,6 +14,7 @@ app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
 
 //uses of routes
 app.use('/auth', AuthRoute);
+app.use('/user', UserRoute);
 
 dotenv.config();
 

@@ -35,7 +35,7 @@ export const loginUser = async (req, res) => {
             const validity = await bcrypt.compare(password, user.password);
 
             validity
-                ? res.status(200).json(user)
+                ? res.status(200).json(' logged in successfully')
                 : res.status(400).json('Wrong Password');
         } else {
             res.status(404).json('User does not exists');
