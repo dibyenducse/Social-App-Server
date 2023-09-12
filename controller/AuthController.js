@@ -10,7 +10,7 @@ export const registerUser = async (req, res) => {
 
     const newUser = new UserModel({
         username,
-        hashedPass,
+        password: hashedPass,
         firstname,
         lastname,
     });
