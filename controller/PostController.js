@@ -1,7 +1,7 @@
 import PostModel from '../Models/postModel.js';
 import mongoose from 'mongoose';
 import UserModel from '../Models/userModel.js';
-import e from 'express';
+import express from 'express';
 
 //create a new post
 export const createPost = async (req, res) => {
@@ -63,5 +63,25 @@ export const deletePost = async (req, res) => {
         }
     } catch (error) {
         res.status(500).json(error);
+    }
+};
+
+//like/dislike a post
+export const likePost = async (req, res) => {
+    const id = req.params.id;
+    const { userId } = req.body;
+
+    try {
+        const post = await PostModel.findById(id);
+        if (!post.likes.includes(userId)) {
+            await post.updateOne({ $push: { likes: userId } });
+            res.status(200).json('Post Liked');
+        } else {
+            await post.updateOne({ $pull: { likes: userId } });
+            res.status(200).json('Post Unliked');
+        }
+    } catch (error) {
+        res.status(500).json(error);
+        console.log(error);
     }
 };
