@@ -92,6 +92,7 @@ export const getTimelinePosts = async (req, res) => {
 
     try {
         const cuurentUserPosts = await PostModel.find({ userId: userId });
+        //make timeline posts for own user and followed user
         const followingPosts = await UserModel.aggregate([
             {
                 $match: {
@@ -116,7 +117,7 @@ export const getTimelinePosts = async (req, res) => {
 
         res.status(200).json(
             cuurentUserPosts
-                .concat(...followingPosts[0].followingPosts)
+                .concat(...followingPosts[0].followingPosts) //sort latest timeline post
                 .sort((a, b) => {
                     return b.createdAt - a.createdAt;
                 })
